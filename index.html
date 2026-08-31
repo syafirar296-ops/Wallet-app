@@ -246,8 +246,69 @@
     align-items:center;
     padding: 12px 4px;
     border-top: 1px solid rgba(255,255,255,0.05);
+    position: relative;
   }
   .portfolio-row:first-of-type{ border-top:none; }
+  .row-remove-btn{
+    position: absolute;
+    right: -2px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(239,68,68,0.15);
+    color: #ef4444;
+    border: none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor: pointer;
+  }
+  .add-fav-btn{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #1a1a24;
+    border: none;
+    color: var(--purple);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor: pointer;
+  }
+  .empty-fav-note{
+    text-align:center;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    padding: 24px 0;
+  }
+  .coin-picker-list{
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+  .coin-picker-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 10px 4px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .coin-picker-row:first-child{ border-top:none; }
+  .coin-picker-add-btn{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor: pointer;
+    flex-shrink:0;
+  }
+  .coin-picker-add-btn.added{ background: rgba(239,68,68,0.15); color: #ef4444; }
   .asset-info{
     display:flex;
     align-items:center;
@@ -331,6 +392,115 @@
     overflow-y: auto;
   }
   .detail-overlay.open{ display:block; }
+
+  .wallet-overlay{
+    display:none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 1050;
+    overflow-y: auto;
+  }
+  .wallet-overlay.open{ display:block; }
+  .profile-card{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .profile-avatar{
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), #5b3fa8);
+    color: #fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .profile-info{ flex:1; min-width:0; }
+  .profile-name-view{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .profile-edit-btn{
+    background: #1a1a24;
+    border:none;
+    color: var(--text-secondary);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .profile-name-edit{
+    display:flex;
+    gap: 8px;
+  }
+  .profile-name-edit .form-input{ padding: 8px 12px; font-size: 14px; }
+  .profile-save-btn{
+    background: var(--purple);
+    color:#fff;
+    border:none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 0 14px;
+    border-radius: 10px;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .profile-sub{
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  .wallet-tabs{
+    display:flex;
+    gap: 8px;
+    margin: 4px 0 20px;
+    background: #111118;
+    border-radius: 14px;
+    padding: 4px;
+  }
+  .wallet-tab{
+    flex:1;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .wallet-tab.active{
+    background: var(--purple);
+    color: #fff;
+  }
+  .wallet-tab-panel .portfolio-row{ padding-left: 4px; }
+  .fiat-flag{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #1a1a24;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 18px;
+    flex-shrink:0;
+  }
   .detail-header{
     display:flex;
     align-items:center;
@@ -354,16 +524,72 @@
     cursor: pointer;
     flex-shrink:0;
   }
-  .detail-title-group{ display:flex; align-items:center; gap: 10px; }
+  .detail-title-group{ display:flex; align-items:center; gap: 10px; flex: 1; min-width: 0; }
+  .detail-live-badge{
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--green);
+    background: rgba(34,197,94,0.12);
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
   .detail-icon{ width: 34px; height: 34px; border-radius: 50%; overflow:hidden; }
   .detail-icon svg, .detail-icon img{ width:100%; height:100%; }
   .detail-title{ font-size: 18px; font-weight: 700; }
   .detail-subtitle{ font-size: 12.5px; color: var(--text-secondary); }
 
   .detail-body{ padding: 8px 16px 32px; }
-  .detail-price-row{ margin: 8px 0 4px; }
+  .detail-price-row{ margin: 8px 0 4px; position: relative; }
   .detail-price{ font-size: 32px; font-weight: 800; }
-  .detail-change{ font-size: 15px; font-weight: 700; margin-top: 4px; }
+  .detail-change{ font-size: 13px; font-weight: 600; margin-top: 4px; }
+  .live-badge{
+    position: absolute;
+    top: 2px;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--green);
+    background: rgba(34,197,94,0.12);
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+  .live-badge .dot{
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .tf-inline-select{
+    display: inline-block;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: inherit;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 8px;
+    margin-left: 6px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .chart-title-row{
+    display:flex;
+    align-items:center;
+    margin: 4px 0 8px;
+  }
+  .chart-title{
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
 
   .detail-chart-wrap{
     margin: 18px 0;
@@ -393,6 +619,41 @@
   .detail-info-label{ font-size: 13.5px; color: var(--text-secondary); }
   .detail-info-value{ font-size: 14px; font-weight: 600; text-align:right; }
   .detail-info-value a{ color: var(--purple); text-decoration:none; }
+
+  .tx-history-title{
+    font-size: 16px;
+    font-weight: 700;
+    margin: 20px 0 10px;
+  }
+  .tx-history-table{
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    padding: 4px 14px;
+  }
+  .tx-history-header{
+    display:grid;
+    grid-template-columns: 0.9fr 1.2fr 1fr 0.9fr;
+    padding: 12px 0 8px;
+    color: var(--text-tertiary);
+    font-size: 12px;
+  }
+  .tx-history-header span:not(:first-child){ text-align:right; }
+  .tx-history-row{
+    display:grid;
+    grid-template-columns: 0.9fr 1.2fr 1fr 0.9fr;
+    align-items:center;
+    padding: 11px 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 12.5px;
+  }
+  .tx-history-row:first-child{ border-top:none; }
+  .tx-type{ font-weight: 600; }
+  .tx-history-row span:not(:first-child){ text-align:right; }
+  .tx-date{ color: var(--text-secondary); }
+  .tx-status{ font-weight: 600; font-size: 11.5px; }
+  .tx-done{ color: var(--green); }
+  .tx-pending{ color: #f59e0b; }
 
   /* Floating Action Button */
   .fab-wrap{
@@ -438,6 +699,14 @@
     opacity: 1;
     transform: translateY(0) scale(1);
     pointer-events: auto;
+  }
+  .fab-menu-title{
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 6px 10px 8px;
   }
   .fab-item{
     display:flex;
@@ -527,6 +796,41 @@
   }
 
   /* Settings modal */
+  .settings-section-title{
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 20px 0 6px;
+  }
+  .settings-section-title:first-child{ margin-top: 0; }
+  .settings-row-clickable{ cursor: pointer; color: var(--text-secondary); }
+  .account-row{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    padding: 12px 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+  }
+  .account-row:last-child{ border-bottom:none; }
+  .account-avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), #5b3fa8);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .account-info{ flex:1; min-width:0; }
+  .account-name{ font-size: 14.5px; font-weight: 600; }
+  .account-sub{ font-size: 12px; color: var(--text-secondary); }
+  .account-check{ color: var(--purple); flex-shrink:0; }
+  .settings-row-clickable svg{ flex-shrink: 0; }
   .settings-row{
     display:flex;
     justify-content:space-between;
@@ -558,6 +862,47 @@
     transition: left 0.2s;
   }
   .toggle-switch.on::after{ left: 21px; }
+
+  .seed-grid-wrap{ position: relative; }
+  .seed-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .seed-grid.blurred{ filter: blur(6px); user-select: none; pointer-events: none; }
+  .seed-word{
+    background: #111118;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 10px 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    display:flex;
+    align-items:center;
+    gap: 6px;
+  }
+  .seed-index{
+    color: var(--text-tertiary);
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 14px;
+  }
+  .reveal-btn{
+    position: absolute;
+    inset: 0;
+    background: rgba(13,13,20,0.55);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 13.5px;
+    font-weight: 700;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    gap: 8px;
+    cursor: pointer;
+  }
 
   /* Swipeable Portfolio / Favorite cards */
   .swipe-container{
@@ -600,7 +945,7 @@
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.6);
-    z-index: 1000;
+    z-index: 1200;
     align-items: flex-end;
     justify-content: center;
   }
@@ -735,7 +1080,7 @@
 
   <div class="header">
     <div>
-      <h1>My Wallet</h1>
+      <h1 id="main-header-title">My Wallet</h1>
       <div class="sub">Main Account</div>
     </div>
     <div class="bell">
@@ -802,6 +1147,9 @@
       <div class="portfolio-card">
         <div class="portfolio-header">
           <h2>Favorite</h2>
+          <button class="add-fav-btn" id="add-fav-btn" title="Tambah koin favorit">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
         </div>
         <div class="col-headers">
           <span>Asset</span><span>Value (USD)</span><span>Change</span>
@@ -834,6 +1182,19 @@
 
   <div class="fab-wrap" id="fab-wrap">
     <div class="fab-menu" id="fab-menu">
+      <div class="fab-menu-title">Menu Cepat</div>
+      <div class="fab-item" data-fab="account">
+        <span class="fab-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        <span class="fab-item-label">Account</span>
+      </div>
+      <div class="fab-item" data-fab="wallet">
+        <span class="fab-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg>
+        </span>
+        <span class="fab-item-label">Wallet</span>
+      </div>
       <div class="fab-item" data-fab="google">
         <span class="fab-item-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -870,8 +1231,65 @@
           <div class="detail-subtitle" id="detail-subtitle"></div>
         </div>
       </div>
+      <div class="detail-live-badge" id="detail-live-badge"></div>
     </div>
     <div class="detail-body" id="detail-body"></div>
+  </div>
+
+  <div class="wallet-overlay" id="wallet-overlay">
+    <div class="detail-header">
+      <button class="detail-back" id="wallet-back">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <div class="detail-title-group">
+        <div class="detail-title">Wallet</div>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="profile-card">
+        <div class="profile-avatar">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="profile-info">
+          <div class="profile-name-view" id="profile-name-view">
+            <span id="profile-name-text">My Wallet</span>
+            <button class="profile-edit-btn" id="profile-edit-btn" title="Edit nama">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+            </button>
+          </div>
+          <div class="profile-name-edit" id="profile-name-edit" style="display:none;">
+            <input type="text" class="form-input" id="profile-name-input" placeholder="Masukkan nama Anda" maxlength="30">
+            <button class="profile-save-btn" id="profile-save-btn">Simpan</button>
+          </div>
+          <div class="profile-sub">Main Account</div>
+        </div>
+      </div>
+
+      <div class="wallet-tabs">
+        <button class="wallet-tab active" data-wallet-tab="fiat">Fiat</button>
+        <button class="wallet-tab" data-wallet-tab="crypto">Crypto</button>
+      </div>
+
+      <div class="wallet-tab-panel" id="wallet-panel-fiat">
+        <div class="portfolio-header" style="margin-bottom:10px;">
+          <h2 style="font-size:16px;">Mata Uang Fiat</h2>
+          <button class="add-fav-btn" id="add-fiat-btn" title="Tambah mata uang">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+        </div>
+        <div id="wallet-fiat-list"></div>
+      </div>
+
+      <div class="wallet-tab-panel" id="wallet-panel-crypto" style="display:none;">
+        <div class="portfolio-header" style="margin-bottom:10px;">
+          <h2 style="font-size:16px;">Aset Crypto</h2>
+          <button class="add-fav-btn" id="add-crypto-wallet-btn" title="Tambah crypto">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+        </div>
+        <div id="wallet-crypto-list"></div>
+      </div>
+    </div>
   </div>
 
   <div class="modal-overlay" id="modal-overlay">
@@ -926,7 +1344,24 @@ const realLogos = {
   LINK: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#2A5ADA"/><path fill="#fff" d="M16 6l7 4v5l4 2.3v5.4L20 26l-4-2.3-4 2.3-7-3.9v-5.4l4-2.3V10zm0 4.6L10 14v6l6 3.4 6-3.4v-6z"/></svg>`,
   TRX: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#EF0027"/><path fill="#fff" d="M9 9l14 2.6-5.4 13.8-8.6-9.5 6.6 1.4z"/></svg>`,
   UNI: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#FF007A"/><path fill="#fff" d="M13 10c1.5 0 2.4 1 2.6 2.5.3 2 .1 5.7.1 7.5 0 1.6.6 2.4 1.6 2.4.6 0 1-.3 1.2-.6-.5.9-1.5 1.6-2.7 1.6-1.9 0-3.1-1.3-3.2-3.5-.1-2-.1-5.4-.3-6.9-.1-1-.5-1.4-1.1-1.4-.5 0-.9.3-1.1.7-.1-1.2.9-2.3 2.9-2.3z"/></svg>`,
-  BCH: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#0AC18E"/><path fill="#fff" d="M19.8 13.9c.3-1.9-1.2-2.9-3.1-3.6l.6-2.5-1.5-.4-.6 2.4c-.4-.1-.8-.2-1.2-.3l.6-2.5-1.5-.4-.6 2.5c-.3-.1-.6-.2-.9-.2l-2.1-.5-.4 1.6s1.1.25 1.1.27c.6.15.7.55.7.87l-1.7 6.8c-.07.18-.25.46-.68.35.02.02-1.1-.27-1.1-.27l-.75 1.7 1.9.48c.36.09.71.19 1.05.27l-.66 2.63 1.5.37.65-2.63c.41.11.81.21 1.2.31l-.65 2.6 1.5.37.66-2.62c2.55.48 4.47.29 5.28-2.02.65-1.86-.03-2.93-1.37-3.63.98-.23 1.71-.87 1.9-2.2zm-3.4 4.8c-.47 1.86-3.62.85-4.64.6l.83-3.34c1.02.25 4.3.75 3.81 2.74zm.47-4.83c-.42 1.7-3.04.83-3.9.62l.75-3.02c.86.21 3.6.62 3.15 2.4z"/></svg>`
+  BCH: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#0AC18E"/><path fill="#fff" d="M19.8 13.9c.3-1.9-1.2-2.9-3.1-3.6l.6-2.5-1.5-.4-.6 2.4c-.4-.1-.8-.2-1.2-.3l.6-2.5-1.5-.4-.6 2.5c-.3-.1-.6-.2-.9-.2l-2.1-.5-.4 1.6s1.1.25 1.1.27c.6.15.7.55.7.87l-1.7 6.8c-.07.18-.25.46-.68.35.02.02-1.1-.27-1.1-.27l-.75 1.7 1.9.48c.36.09.71.19 1.05.27l-.66 2.63 1.5.37.65-2.63c.41.11.81.21 1.2.31l-.65 2.6 1.5.37.66-2.62c2.55.48 4.47.29 5.28-2.02.65-1.86-.03-2.93-1.37-3.63.98-.23 1.71-.87 1.9-2.2zm-3.4 4.8c-.47 1.86-3.62.85-4.64.6l.83-3.34c1.02.25 4.3.75 3.81 2.74zm.47-4.83c-.42 1.7-3.04.83-3.9.62l.75-3.02c.86.21 3.6.62 3.15 2.4z"/></svg>`,
+  ATOM: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#2E3148"/><g fill="none" stroke="#fff" stroke-width="1.3"><ellipse cx="16" cy="16" rx="10" ry="4"/><ellipse cx="16" cy="16" rx="10" ry="4" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="10" ry="4" transform="rotate(120 16 16)"/></g><circle cx="16" cy="16" r="2.3" fill="#fff"/></svg>`,
+  XLM: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#000"/><path fill="#fff" d="M8 20.5c3-6 10-9.5 16-9.5-1.2 2.2-3.4 3.9-6 5l6-1.5c-3 6-10 9.5-16 9.5 1.2-2.2 3.4-3.9 6-5z"/></svg>`,
+  ETC: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#328332"/><g fill="#fff"><path fill-opacity=".7" d="M16.5 5v9.9l7.5 3.4z"/><path d="M16.5 5 9 18.3l7.5-3.4z"/><path fill-opacity=".7" d="M16.5 21.4v6L24 19.5z"/><path d="M16.5 27.4v-6L9 19.5z"/></g></svg>`,
+  FIL: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#0090FF"/><path fill="#fff" d="M16 6l8 4.6v10.8L16 26l-8-4.6V10.6zm0 3.2-5 2.9v6.8l5 2.9 5-2.9v-6.8z"/></svg>`,
+  APT: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#000"/><path fill="none" stroke="#fff" stroke-width="1.6" d="M7 20c3-7 6-11 9-11s6 4 9 11M7 20h18"/></svg>`,
+  ARB: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#28A0F0"/><path fill="#fff" d="M12 9h3l-4 14H8zm5 0h3l4 14h-3l-1.2-4.3h-4.4z"/></svg>`,
+  OP: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#FF0420"/><circle cx="12" cy="16" r="4.2" fill="none" stroke="#fff" stroke-width="1.8"/><path fill="#fff" d="M18.5 12h2.7l-2 8h-2z"/><path fill="#fff" d="M22.5 12c1.7 0 2.8 1.1 2.8 2.6 0 2.7-1.9 5.6-4.8 5.6"/></svg>`,
+  NEAR: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#000"/><path fill="#fff" d="M19.5 9.5c-.5 0-.9.2-1.2.6l-3 3.7c-.1.2-.1.4.1.5.2.1.4 0 .5-.1l2.8-3.5c.2-.2.5-.3.7-.1.2.1.3.4.3.6v9.6c0 .2-.1.3-.3.3-.1 0-.2 0-.3-.1l-8.5-10.3c-.3-.4-.8-.6-1.3-.6-.9 0-1.6.7-1.6 1.6v11.6c0 .9.7 1.6 1.6 1.6.5 0 .9-.2 1.2-.6l3-3.7c.1-.2.1-.4-.1-.5-.2-.1-.4 0-.5.1l-2.8 3.5c-.2.2-.5.3-.7.1-.2-.1-.3-.4-.3-.6v-9.6c0-.2.1-.3.3-.3.1 0 .2 0 .3.1l8.5 10.3c.3.4.8.6 1.3.6.9 0 1.6-.7 1.6-1.6V11.1c0-.9-.7-1.6-1.6-1.6z"/></svg>`,
+  ICP: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#111"/><g fill="none" stroke-width="2.5"><path stroke="#F15A24" d="M16 12c-3 0-6 2.5-8.5 2.5S3 13 3 13"/><path stroke="#29ABE2" d="M16 20c3 0 6-2.5 8.5-2.5S29 19 29 19"/></g></svg>`,
+  ALGO: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#000"/><path fill="#fff" d="M9 22l5-11 1.8 4-3.2 7zm14 0h-2.6l-3.6-9.5-1 2.3L19 22h-2.6l-4-10.5 1-2.5h2.4l1 2.6 1-2.6h2.5l5.7 13z"/></svg>`,
+  AAVE: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#B6509E"/><path fill="#fff" d="M16 8l7 16h-3l-1.5-3.5h-5L12 24H9zm0 5.5-1.8 4.5h3.6z"/><circle cx="12" cy="12" r="1" fill="#fff"/><circle cx="20" cy="12" r="1" fill="#fff"/></svg>`,
+  MKR: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#1AAB9B"/><path fill="#fff" d="M9 10h2.5l4.5 8 4.5-8H23v12h-2.4v-8.3L16.3 22h-.6l-4.3-8.3V22H9z"/></svg>`,
+  GRT: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#6747ED"/><path fill="#fff" d="M16 8a8 8 0 1 0 5.3 14l-1.5-1.7A6 6 0 1 1 22 16h2a8 8 0 0 0-8-8z"/></svg>`,
+  SAND: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#00ADEF"/><path fill="#fff" d="M9 20l4-9 3 2-3 7zm7-9 3-2 4 9-4 2z"/><circle cx="16" cy="10" r="2" fill="#fff"/></svg>`,
+  MANA: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#FF2D55"/><rect x="10" y="10" width="12" height="12" fill="none" stroke="#fff" stroke-width="1.8"/><rect x="14" y="14" width="4" height="4" fill="#fff"/></svg>`,
+  SHIB: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#F00500"/><text x="16" y="21" font-size="14" font-weight="800" fill="#fff" text-anchor="middle" font-family="Arial">S</text></svg>`,
+  PEPE: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#4C9A2A"/><circle cx="12" cy="14" r="2.2" fill="#fff"/><circle cx="20" cy="14" r="2.2" fill="#fff"/><circle cx="12" cy="14" r="1" fill="#000"/><circle cx="20" cy="14" r="1" fill="#000"/><path fill="none" stroke="#fff" stroke-width="1.6" d="M11 21c2 1.5 8 1.5 10 0"/></svg>`
 };
 
 const iconTemplates = [
@@ -1097,12 +1532,19 @@ function buildRangePills(){
   });
 }
 
+let favoriteSymbols = ['BTC', 'SOL', 'DOGE', 'BCH'];
+
 function renderMiniList(elementId, symbols){
   const el = document.getElementById(elementId);
   if (!el) return;
   const rows = symbols
     .map(sym => allCoins.find(c => c.symbol === sym))
     .filter(Boolean);
+
+  if (!rows.length){
+    el.innerHTML = `<div class="empty-fav-note">Belum ada koin favorit. Ketuk + untuk menambahkan.</div>`;
+    return;
+  }
 
   el.innerHTML = rows.map(c => {
     const price = currency === 'IDR' ? c.priceIdr : c.priceUsd;
@@ -1125,7 +1567,19 @@ function renderMiniList(elementId, symbols){
 
 function renderPortfolio(){
   renderMiniList('portfolio-list', ['BTC', 'ETH', 'SOL']);
-  renderMiniList('favorite-list', ['BTC', 'SOL', 'DOGE', 'BCH']);
+  renderMiniList('favorite-list', favoriteSymbols);
+}
+
+function addToFavorites(symbol){
+  if (!favoriteSymbols.includes(symbol)){
+    favoriteSymbols.push(symbol);
+    renderPortfolio();
+  }
+}
+
+function removeFromFavorites(symbol){
+  favoriteSymbols = favoriteSymbols.filter(s => s !== symbol);
+  renderPortfolio();
 }
 
 function render(){
@@ -1259,7 +1713,40 @@ const tradingViewSymbolMap = {
   DYDX: 'BINANCE:DYDXUSDT', GMX: 'BINANCE:GMXUSDT', PEPE: 'BINANCE:PEPEUSDT', SHIB: 'BINANCE:SHIBUSDT',
   FLOKI: 'BINANCE:FLOKIUSDT', BONK: 'BINANCE:BONKUSDT', WLD: 'BINANCE:WLDUSDT', KAS: 'BINANCE:KASUSDT',
   MNT: 'BINANCE:MNTUSDT', OSMO: 'BINANCE:OSMOUSDT', AKT: 'BINANCE:AKTUSDT', FET: 'BINANCE:FETUSDT',
-  WIF: 'BINANCE:WIFUSDT', ENA: 'BINANCE:ENAUSDT', ONDO: 'BINANCE:ONDOUSDT', W: 'BINANCE:WUSDT'
+  WIF: 'BINANCE:WIFUSDT', ENA: 'BINANCE:ENAUSDT', ONDO: 'BINANCE:ONDOUSDT', W: 'BINANCE:WUSDT',
+  VET: 'BINANCE:VETUSDT', EOS: 'BINANCE:EOSUSDT', XTZ: 'BINANCE:XTZUSDT', THETA: 'BINANCE:THETAUSDT',
+  MKR: 'BINANCE:MKRUSDT', GRT: 'BINANCE:GRTUSDT', FTM: 'BINANCE:FTMUSDT', EGLD: 'BINANCE:EGLDUSDT',
+  NEO: 'BINANCE:NEOUSDT', WAVES: 'BINANCE:WAVESUSDT', KAVA: 'BINANCE:KAVAUSDT', '1INCH': 'BINANCE:1INCHUSDT',
+  ONT: 'BINANCE:ONTUSDT', ICX: 'BINANCE:ICXUSDT', OMG: 'BINANCE:OMGUSDT', BAL: 'BINANCE:BALUSDT',
+  REN: 'BINANCE:RENUSDT', KNC: 'BINANCE:KNCUSDT', CELR: 'BINANCE:CELRUSDT', CTSI: 'BINANCE:CTSIUSDT',
+  SKL: 'BINANCE:SKLUSDT', NKN: 'BINANCE:NKNUSDT', OCEAN: 'BINANCE:OCEANUSDT', BAND: 'BINANCE:BANDUSDT',
+  RSR: 'BINANCE:RSRUSDT', MINA: 'BINANCE:MINAUSDT', RPL: 'BINANCE:RPLUSDT', BLUR: 'BINANCE:BLURUSDT',
+  STRK: 'BINANCE:STRKUSDT', BEAM: 'BINANCE:BEAMUSDT', CFX: 'BINANCE:CFXUSDT', ASTR: 'BINANCE:ASTRUSDT',
+  ROSE: 'BINANCE:ROSEUSDT', HNT: 'BINANCE:HNTUSDT', LUNC: 'BINANCE:LUNCUSDT', LUNA: 'BINANCE:LUNAUSDT',
+  CAKE: 'BINANCE:CAKEUSDT', DAI: 'BINANCE:DAIUSDT', ZRX: 'BINANCE:ZRXUSDT', DGB: 'BINANCE:DGBUSDT',
+  RVN: 'BINANCE:RVNUSDT', WAXP: 'BINANCE:WAXPUSDT', ONE: 'BINANCE:ONEUSDT', AGIX: 'BINANCE:AGIXUSDT',
+  KLAY: 'BINANCE:KLAYUSDT',
+  USDC: 'BINANCE:USDCUSDT', NMR: 'BINANCE:NMRUSDT', GLM: 'BINANCE:GLMUSDT', SNT: 'BINANCE:SNTUSDT',
+  ANT: 'BINANCE:ANTUSDT', GNO: 'BINANCE:GNOUSDT', MTL: 'BINANCE:MTLUSDT', RLC: 'BINANCE:RLCUSDT',
+  QNT: 'BINANCE:QNTUSDT', IOTX: 'BINANCE:IOTXUSDT', AMPL: 'BINANCE:AMPLUSDT', OGN: 'BINANCE:OGNUSDT',
+  API3: 'BINANCE:API3USDT', UMA: 'BINANCE:UMAUSDT', PERP: 'BINANCE:PERPUSDT', ALPHA: 'BINANCE:ALPHAUSDT',
+  BADGER: 'BINANCE:BADGERUSDT', XVS: 'BINANCE:XVSUSDT', ALPACA: 'BINANCE:ALPACAUSDT', JST: 'BINANCE:JSTUSDT',
+  WRX: 'BINANCE:WRXUSDT', CRO: 'BINANCE:CROUSDT', FTT: 'BINANCE:FTTUSDT', OKB: 'BINANCE:OKBUSDT',
+  BOBA: 'BINANCE:BOBAUSDT', GLMR: 'BINANCE:GLMRUSDT', MOVR: 'BINANCE:MOVRUSDT', ORN: 'BINANCE:ORNUSDT',
+  SRM: 'BINANCE:SRMUSDT', RAY: 'BINANCE:RAYUSDT', AUDIO: 'BINANCE:AUDIOUSDT', LPT: 'BINANCE:LPTUSDT',
+  TFUEL: 'BINANCE:TFUELUSDT', DIA: 'BINANCE:DIAUSDT', RLY: 'BINANCE:RLYUSDT', SUPER: 'BINANCE:SUPERUSDT',
+  ILV: 'BINANCE:ILVUSDT', ALICE: 'BINANCE:ALICEUSDT', YGG: 'BINANCE:YGGUSDT', GHST: 'BINANCE:GHSTUSDT',
+  REVV: 'BINANCE:REVVUSDT', RARE: 'BINANCE:RAREUSDT', LOOKS: 'BINANCE:LOOKSUSDT', MAGIC: 'BINANCE:MAGICUSDT',
+  MBOX: 'BINANCE:MBOXUSDT', TLM: 'BINANCE:TLMUSDT', SPS: 'BINANCE:SPSUSDT', PORTAL: 'BINANCE:PORTALUSDT',
+  XAI: 'BINANCE:XAIUSDT', NOT: 'BINANCE:NOTUSDT', BOME: 'BINANCE:BOMEUSDT', POPCAT: 'BINANCE:POPCATUSDT',
+  MEW: 'BINANCE:MEWUSDT', TURBO: 'BINANCE:TURBOUSDT', MEME: 'BINANCE:MEMEUSDT', FXS: 'BINANCE:FXSUSDT',
+  LQTY: 'BINANCE:LQTYUSDT', CVX: 'BINANCE:CVXUSDT', STG: 'BINANCE:STGUSDT', RDNT: 'BINANCE:RDNTUSDT',
+  GNS: 'BINANCE:GNSUSDT', JOE: 'BINANCE:JOEUSDT', LYRA: 'BINANCE:LYRAUSDT', AEVO: 'BINANCE:AEVOUSDT',
+  REZ: 'BINANCE:REZUSDT', EIGEN: 'BINANCE:EIGENUSDT', MANTA: 'BINANCE:MANTAUSDT', ZETA: 'BINANCE:ZETAUSDT',
+  DYM: 'BINANCE:DYMUSDT', ALT: 'BINANCE:ALTUSDT', SAGA: 'BINANCE:SAGAUSDT', OMNI: 'BINANCE:OMNIUSDT',
+  BLAST: 'BINANCE:BLASTUSDT', ETHFI: 'BINANCE:ETHFIUSDT', AERO: 'BINANCE:AEROUSDT', RON: 'BINANCE:RONUSDT',
+  TNSR: 'BINANCE:TNSRUSDT', IO: 'BINANCE:IOUSDT', MOVE: 'BINANCE:MOVEUSDT', BERA: 'BINANCE:BERAUSDT',
+  USUAL: 'BINANCE:USUALUSDT', PIXEL: 'BINANCE:PIXELUSDT', COTI: 'BINANCE:COTIUSDT', CKB: 'BINANCE:CKBUSDT'
 };
 
 // ---- Overlay real-time prices from Binance's public ticker (same exchange feed TradingView charts use) ----
@@ -1336,7 +1823,7 @@ function closeModal(){
 }
 
 function openModal(type){
-  const titles = { send: 'Send', receive: 'Receive', swap: 'Swap', buy: 'Buy', sell: 'Sell', chat: 'Chat With AI', settings: 'Settings' };
+  const titles = { send: 'Send', receive: 'Receive', swap: 'Swap', buy: 'Buy', sell: 'Sell', chat: 'Chat With AI', settings: 'Settings', 'change-pin': 'Ubah PIN', 'seed-phrase': 'Seed Phrase', account: 'Account' };
   modalTitle.textContent = titles[type] || '';
   modalBody.innerHTML = buildForm(type);
   modalOverlay.classList.add('open');
@@ -1490,19 +1977,13 @@ function buildForm(type){
   }
   if (type === 'settings'){
     return `
+      <div class="settings-section-title">Umum</div>
       <div class="settings-row">
         <div>
           <div class="settings-label">Notifikasi Push</div>
           <div class="settings-sub">Terima notifikasi transaksi & harga</div>
         </div>
         <div class="toggle-switch on" id="s-notif"></div>
-      </div>
-      <div class="settings-row">
-        <div>
-          <div class="settings-label">Face ID / Sidik Jari</div>
-          <div class="settings-sub">Keamanan login biometrik</div>
-        </div>
-        <div class="toggle-switch on" id="s-biometric"></div>
       </div>
       <div class="settings-row">
         <div>
@@ -1531,7 +2012,89 @@ function buildForm(type){
           <option value="en">English</option>
         </select>
       </div>
+
+      <div class="settings-section-title">Privacy &amp; Security</div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Face ID / Sidik Jari</div>
+          <div class="settings-sub">Keamanan login biometrik</div>
+        </div>
+        <div class="toggle-switch on" id="s-biometric"></div>
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Kunci Otomatis</div>
+          <div class="settings-sub">Kunci aplikasi saat tidak aktif</div>
+        </div>
+        <div class="toggle-switch on" id="s-autolock"></div>
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Sembunyikan Saldo</div>
+          <div class="settings-sub">Sembunyikan nominal di layar utama</div>
+        </div>
+        <div class="toggle-switch" id="s-hide-balance"></div>
+      </div>
+      <div class="settings-row settings-row-clickable" id="s-change-pin">
+        <div>
+          <div class="settings-label">Ubah PIN</div>
+          <div class="settings-sub">Ganti PIN keamanan wallet</div>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="m9 18 6-6-6-6"/></svg>
+      </div>
+      <div class="settings-row settings-row-clickable" id="s-seed-phrase">
+        <div>
+          <div class="settings-label">Tampilkan Seed Phrase</div>
+          <div class="settings-sub">Frasa pemulihan 12 kata wallet Anda</div>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="m9 18 6-6-6-6"/></svg>
+      </div>
+
       <button class="submit-btn" id="f-submit" style="margin-top:20px;">Simpan</button>
+    `;
+  }
+  if (type === 'change-pin'){
+    return `
+      <div class="form-group">
+        <label class="form-label">PIN Saat Ini</label>
+        <input class="form-input" id="f-pin-old" type="password" inputmode="numeric" maxlength="6" placeholder="••••••">
+        <div class="field-hint">Masukkan PIN 6 digit yang sedang digunakan.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">PIN Baru</label>
+        <input class="form-input" id="f-pin-new" type="password" inputmode="numeric" maxlength="6" placeholder="••••••">
+        <div class="field-hint">PIN baru terdiri dari 6 digit angka.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Konfirmasi PIN Baru</label>
+        <input class="form-input" id="f-pin-confirm" type="password" inputmode="numeric" maxlength="6" placeholder="••••••">
+        <div class="field-hint">Ulangi PIN baru untuk konfirmasi.</div>
+      </div>
+      <button class="submit-btn" id="f-submit">Simpan PIN Baru</button>
+    `;
+  }
+  if (type === 'seed-phrase'){
+    const words = ['orbit','maple','velvet','canyon','ripple','forge','glacier','tundra','ember','falcon','cipher','harbor'];
+    return `
+      <div class="form-note" style="margin-bottom:16px;color:#ef4444;">
+        &#9888; Jangan pernah bagikan seed phrase ini ke siapa pun, termasuk pihak yang mengaku dari tim support. Siapa pun yang memiliki frasa ini dapat mengambil alih seluruh aset Anda.
+      </div>
+      <div class="seed-grid-wrap" id="seed-grid-wrap">
+        <div class="seed-grid blurred" id="seed-grid">
+          ${words.map((w, i) => `<div class="seed-word"><span class="seed-index">${i + 1}</span>${w}</div>`).join('')}
+        </div>
+        <button class="reveal-btn" id="reveal-seed-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          Ketuk untuk menampilkan
+        </button>
+      </div>
+      <button class="copy-btn" id="copy-seed-btn" style="width:100%;padding:12px;border-radius:12px;margin-top:14px;display:none;">Salin Seed Phrase</button>
+    `;
+  }
+  if (type === 'account'){
+    return `
+      <div id="account-list"></div>
+      <button class="submit-btn" id="add-account-btn" style="margin-top:16px;">+ Tambah Akun Baru</button>
     `;
   }
   return '';
@@ -1590,9 +2153,9 @@ function wireForm(type){
     input.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage(); });
   }
   if (type === 'settings'){
-    ['s-notif', 's-biometric', 's-dark'].forEach(id => {
+    ['s-notif', 's-biometric', 's-dark', 's-autolock', 's-hide-balance'].forEach(id => {
       const el = document.getElementById(id);
-      el.addEventListener('click', () => el.classList.toggle('on'));
+      if (el) el.addEventListener('click', () => el.classList.toggle('on'));
     });
     const currSel = document.getElementById('s-currency');
     currSel.value = currency;
@@ -1600,7 +2163,61 @@ function wireForm(type){
       currencySelect.value = currSel.value;
       currencySelect.dispatchEvent(new Event('change'));
     });
+    const pinRow = document.getElementById('s-change-pin');
+    if (pinRow) pinRow.addEventListener('click', () => openModal('change-pin'));
+    const seedRow = document.getElementById('s-seed-phrase');
+    if (seedRow) seedRow.addEventListener('click', () => openModal('seed-phrase'));
   }
+  if (type === 'seed-phrase'){
+    const revealBtn = document.getElementById('reveal-seed-btn');
+    const seedGrid = document.getElementById('seed-grid');
+    const copyBtn = document.getElementById('copy-seed-btn');
+    revealBtn.addEventListener('click', () => {
+      seedGrid.classList.remove('blurred');
+      revealBtn.style.display = 'none';
+      copyBtn.style.display = 'block';
+    });
+    copyBtn.addEventListener('click', () => {
+      const words = Array.from(seedGrid.querySelectorAll('.seed-word')).map(el => el.textContent.replace(/^\d+/, '').trim());
+      const text = words.join(' ');
+      if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+      copyBtn.textContent = 'Tersalin!';
+      setTimeout(() => { copyBtn.textContent = 'Salin Seed Phrase'; }, 1500);
+    });
+  }
+  if (type === 'account'){
+    renderAccountList();
+    document.getElementById('add-account-btn').addEventListener('click', () => {
+      accountsList.push({ name: `Account ${accountsList.length + 1}`, sub: fakeAddress('BTC').slice(0, 14) + '...' });
+      renderAccountList();
+    });
+  }
+}
+
+let accountsList = [{ name: 'Main Account', sub: 'Akun utama' }];
+let activeAccountIndex = 0;
+
+function renderAccountList(){
+  const el = document.getElementById('account-list');
+  if (!el) return;
+  el.innerHTML = accountsList.map((acc, i) => `
+    <div class="account-row" data-account-index="${i}">
+      <div class="account-avatar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="account-info">
+        <div class="account-name">${acc.name}</div>
+        <div class="account-sub">${acc.sub}</div>
+      </div>
+      ${i === activeAccountIndex ? `<svg class="account-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>` : ''}
+    </div>
+  `).join('');
+  el.querySelectorAll('.account-row').forEach(row => {
+    row.addEventListener('click', () => {
+      activeAccountIndex = parseInt(row.dataset.accountIndex, 10);
+      renderAccountList();
+    });
+  });
 }
 
 document.querySelectorAll('.action-btn').forEach(btn => {
@@ -1639,6 +2256,10 @@ document.querySelectorAll('.fab-item').forEach(item => {
       openExternal('https://gemini.google.com');
     } else if (action === 'settings'){
       openModal('settings');
+    } else if (action === 'wallet'){
+      openWalletPage();
+    } else if (action === 'account'){
+      openModal('account');
     }
   });
 });
@@ -1655,6 +2276,7 @@ const detailBack = document.getElementById('detail-back');
 const detailIcon = document.getElementById('detail-icon');
 const detailTitle = document.getElementById('detail-title');
 const detailSubtitle = document.getElementById('detail-subtitle');
+const detailLiveBadge = document.getElementById('detail-live-badge');
 const detailBody = document.getElementById('detail-body');
 
 // (tradingViewSymbolMap moved earlier in script, near top-level data helpers)
@@ -1684,7 +2306,54 @@ const explorerMap = {
   ALGO: 'https://allo.info', SAND: 'https://etherscan.io/token/0x3845badade8e6dff049820680d1f14bd3903a5d0',
   MANA: 'https://etherscan.io/token/0x0f5d2fb29fb7d3cfee444a200298f468908cc942', AAVE: 'https://etherscan.io/token/0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9',
   UNI: 'https://etherscan.io/token/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', LINK: 'https://etherscan.io/token/0x514910771af9ca656af840dff83e8264ecf986ca',
-  SHIB: 'https://etherscan.io/token/0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce', PEPE: 'https://etherscan.io/token/0x6982508145454ce325ddbe47a25d4ec3d2311933'
+  SHIB: 'https://etherscan.io/token/0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce', PEPE: 'https://etherscan.io/token/0x6982508145454ce325ddbe47a25d4ec3d2311933',
+  VET: 'https://explore.vechain.org', EOS: 'https://bloks.io', XTZ: 'https://tzstats.com',
+  THETA: 'https://explorer.thetatoken.org', MKR: 'https://etherscan.io', GRT: 'https://etherscan.io',
+  FTM: 'https://ftmscan.com', EGLD: 'https://explorer.multiversx.com', NEO: 'https://neotube.io',
+  WAVES: 'https://wavesexplorer.com', KAVA: 'https://www.mintscan.io/kava', ONT: 'https://explorer.ont.io',
+  ICX: 'https://tracker.icon.foundation', OMG: 'https://etherscan.io', BAL: 'https://etherscan.io',
+  REN: 'https://etherscan.io', KNC: 'https://etherscan.io', CELR: 'https://etherscan.io',
+  CTSI: 'https://etherscan.io', SKL: 'https://etherscan.io', NKN: 'https://mainnet.nkn.org',
+  OCEAN: 'https://etherscan.io', BAND: 'https://www.mintscan.io/band', RSR: 'https://etherscan.io',
+  CVC: 'https://etherscan.io', NMR: 'https://etherscan.io', INJ: 'https://www.mintscan.io/injective',
+  MINA: 'https://minaexplorer.com', RPL: 'https://etherscan.io', BLUR: 'https://etherscan.io',
+  STRK: 'https://starkscan.co', BEAM: 'https://explorer.onbeam.com', CFX: 'https://www.confluxscan.io',
+  ASTR: 'https://astar.subscan.io', ROSE: 'https://explorer.oasis.io', HNT: 'https://explorer.helium.com',
+  KLAY: 'https://scope.klaytn.com', LUNC: 'https://finder.terra.money', LUNA: 'https://finder.terra.money',
+  CAKE: 'https://bscscan.com', DAI: 'https://etherscan.io', NEXO: 'https://etherscan.io',
+  CEL: 'https://etherscan.io', BNT: 'https://etherscan.io', GLM: 'https://etherscan.io',
+  SNT: 'https://etherscan.io', REP: 'https://etherscan.io', ZRX: 'https://etherscan.io',
+  ANT: 'https://etherscan.io', GNO: 'https://etherscan.io', MLN: 'https://etherscan.io',
+  POWR: 'https://etherscan.io', WAN: 'https://wanscan.org', XNO: 'https://nanolooker.com',
+  SC: 'https://explore.sia.tech', DGB: 'https://digiexplorer.info', RVN: 'https://ravencoin.network',
+  ZEN: 'https://explorer.horizen.io', XVG: 'https://verge-blockchain.info', STEEM: 'https://steemworld.org',
+  HIVE: 'https://hiveblocks.com', DCR: 'https://dcrdata.decred.org', KMD: 'https://kmdexplorer.io',
+  WAXP: 'https://waxblock.io', LSK: 'https://liskscan.com', MTL: 'https://etherscan.io',
+  RLC: 'https://etherscan.io', OGN: 'https://etherscan.io', BADGER: 'https://etherscan.io',
+  ALCX: 'https://etherscan.io', RGT: 'https://etherscan.io', CREAM: 'https://etherscan.io',
+  VALUE: 'https://bscscan.com', FARM: 'https://etherscan.io', PICKLE: 'https://etherscan.io',
+  AKRO: 'https://etherscan.io', DODO: 'https://etherscan.io', MIR: 'https://finder.terra.money',
+  ANC: 'https://finder.terra.money', XVS: 'https://bscscan.com', ALPACA: 'https://bscscan.com',
+  BUNNY: 'https://bscscan.com', BIFI: 'https://bscscan.com', AUTO: 'https://bscscan.com',
+  FOR: 'https://bscscan.com', MDX: 'https://bscscan.com', JST: 'https://tronscan.org',
+  WRX: 'https://etherscan.io', FTT: 'https://etherscan.io', BIT: 'https://etherscan.io',
+  BGB: 'https://bscscan.com', MX: 'https://etherscan.io', DFI: 'https://defiscan.live',
+  ORN: 'https://etherscan.io', SRM: 'https://solscan.io', STEP: 'https://solscan.io',
+  ATLAS: 'https://solscan.io', MEDIA: 'https://solscan.io', SLND: 'https://solscan.io',
+  ONE: 'https://explorer.harmony.one', '1INCH': 'https://etherscan.io', AGIX: 'https://etherscan.io',
+  AKT: 'https://www.mintscan.io/akash', FET: 'https://etherscan.io', OSMO: 'https://www.mintscan.io/osmosis',
+  RUNE: 'https://runescan.io', CRV: 'https://etherscan.io', SNX: 'https://etherscan.io',
+  COMP: 'https://etherscan.io', YFI: 'https://etherscan.io', SUSHI: 'https://etherscan.io',
+  ENJ: 'https://etherscan.io', CHZ: 'https://etherscan.io', BAT: 'https://etherscan.io',
+  ZIL: 'https://viewblock.io/zilliqa', QTUM: 'https://qtum.info', LRC: 'https://etherscan.io',
+  STORJ: 'https://etherscan.io', ANKR: 'https://etherscan.io', SEI: 'https://www.seiscan.app',
+  TIA: 'https://www.mintscan.io/celestia', SUI: 'https://suiscan.xyz', PYTH: 'https://solscan.io',
+  JUP: 'https://solscan.io', RNDR: 'https://etherscan.io', IMX: 'https://etherscan.io',
+  GALA: 'https://etherscan.io', STX: 'https://explorer.stacks.co', LDO: 'https://etherscan.io',
+  DYDX: 'https://www.mintscan.io/dydx', GMX: 'https://arbiscan.io', FLOKI: 'https://etherscan.io',
+  BONK: 'https://solscan.io', WLD: 'https://etherscan.io', KAS: 'https://explorer.kaspa.org',
+  MNT: 'https://explorer.mantle.xyz', WIF: 'https://solscan.io', ENA: 'https://etherscan.io',
+  ONDO: 'https://etherscan.io'
 };
 
 function getNetwork(symbol){
@@ -1695,18 +2364,177 @@ function getExplorerUrl(symbol){
   return explorerMap[symbol] || null;
 }
 
+// Verified smart contract addresses (only include ones we can confirm are correct)
+const contractMap = {
+  USDT: { address: '0xdAC17F958D2ee523a2206206994597C13D831ec', explorer: 'https://etherscan.io/token/0xdAC17F958D2ee523a2206206994597C13D831ec' },
+  USDC: { address: '0xA0b86991c6218b36c1D19D4a2e9Eb0cE3606eB48', explorer: 'https://etherscan.io/token/0xA0b86991c6218b36c1D19D4a2e9Eb0cE3606eB48' },
+  LINK: { address: '0x514910771AF9Ca656af840dff83E8264EcF986CA', explorer: 'https://etherscan.io/token/0x514910771AF9Ca656af840dff83E8264EcF986CA' },
+  UNI: { address: '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984', explorer: 'https://etherscan.io/token/0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984' },
+  SHIB: { address: '0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE', explorer: 'https://etherscan.io/token/0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE' },
+  PEPE: { address: '0x6982508145454Ce325dDbE47a25d4ec3d2311933', explorer: 'https://etherscan.io/token/0x6982508145454Ce325dDbE47a25d4ec3d2311933' },
+  AAVE: { address: '0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9', explorer: 'https://etherscan.io/token/0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9' },
+  MKR: { address: '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2', explorer: 'https://etherscan.io/token/0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2' },
+  SAND: { address: '0x3845badAde8e6dFF049820680d1F14bD3903a5d0', explorer: 'https://etherscan.io/token/0x3845badAde8e6dFF049820680d1F14bD3903a5d0' },
+  MANA: { address: '0x0F5D2fB29fb7d3CFeE444a200298f468908cC942', explorer: 'https://etherscan.io/token/0x0F5D2fB29fb7d3CFeE444a200298f468908cC942' },
+  GRT: { address: '0xc944E90C64B2c07662A292be6244BDf05Cda44a7', explorer: 'https://etherscan.io/token/0xc944E90C64B2c07662A292be6244BDf05Cda44a7' },
+  MATIC: { address: '0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0', explorer: 'https://etherscan.io/token/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0' },
+  DAI: { address: '0x6B175474E89094C44Da98b954EedeAC495271d0F', explorer: 'https://etherscan.io/token/0x6B175474E89094C44Da98b954EedeAC495271d0F' },
+  CRV: { address: '0xD533a949740bb3306d119CC777fa900bA034cd52', explorer: 'https://etherscan.io/token/0xD533a949740bb3306d119CC777fa900bA034cd52' },
+  COMP: { address: '0xc00e94Cb662C3520282E6f5717214004A7f26888', explorer: 'https://etherscan.io/token/0xc00e94Cb662C3520282E6f5717214004A7f26888' }
+};
+
+// Coins that are native assets of their own chain (no smart contract; they ARE the base currency)
+const nativeCoinSet = new Set([
+  'BTC','ETH','SOL','BNB','XRP','ADA','DOGE','LTC','TRX','DOT','ATOM','XLM','ETC','FIL','APT',
+  'NEAR','ICP','VET','ALGO','EOS','XTZ','THETA','HBAR','EGLD','FLOW','XMR','ZEC','DASH','NEO',
+  'WAVES','KSM','KAVA','RUNE','ZIL','ONT','QTUM','ICX','INJ','SEI','TIA','SUI','STX','MINA',
+  'KAS','CFX','ASTR','OSMO','AKT','ROSE','HNT','KLAY','LUNA','LUNC','ONE','WAXP','LSK','KDA',
+  'XRD','CSPR','XCH','ELA','CKB','RVN','DGB','SC','ZEN','XVG','HIVE','STEEM','DCR','KMD','BTS',
+  'WAN','XNO','BCN','ARDR','FCT','MAID','GLMR','MOVR','EVMOS','BCH','ARB','OP','MNT','BERA',
+  'MOVE','RON','FTM','NEO','CELO','GLMR'
+]);
+
+function getSmartContractInfo(coin){
+  const contract = contractMap[coin.symbol];
+  if (contract){
+    return { type: 'contract', address: contract.address, explorer: contract.explorer };
+  }
+  if (nativeCoinSet.has(coin.symbol)){
+    return { type: 'native' };
+  }
+  return { type: 'unknown' };
+}
+
 function getWebsite(symbol, name){
   const known = {
-    BTC: 'https://bitcoin.org', ETH: 'https://ethereum.org', SOL: 'https://solana.com',
-    BNB: 'https://www.bnbchain.org', USDT: 'https://tether.to', XRP: 'https://ripple.com',
-    ADA: 'https://cardano.org', DOGE: 'https://dogecoin.com', MATIC: 'https://polygon.technology',
-    LTC: 'https://litecoin.org', DOT: 'https://polkadot.network', LINK: 'https://chain.link',
-    TRX: 'https://tron.network', UNI: 'https://uniswap.org', BCH: 'https://bitcoincash.org',
-    ATOM: 'https://cosmos.network', XLM: 'https://stellar.org', AAVE: 'https://aave.com'
+    BTC: 'https://bitcoin.org', ETH: 'https://ethereum.org', USDT: 'https://tether.to',
+    BNB: 'https://www.bnbchain.org', SOL: 'https://solana.com', XRP: 'https://ripple.com',
+    USDC: 'https://www.circle.com/usdc', ADA: 'https://cardano.org', DOGE: 'https://dogecoin.com',
+    MATIC: 'https://polygon.technology', LTC: 'https://litecoin.org', TRX: 'https://tron.network',
+    LINK: 'https://chain.link', UNI: 'https://uniswap.org', ATOM: 'https://cosmos.network',
+    XLM: 'https://stellar.org', ETC: 'https://ethereumclassic.org', FIL: 'https://filecoin.io',
+    APT: 'https://aptosfoundation.org', ARB: 'https://arbitrum.io', OP: 'https://www.optimism.io',
+    NEAR: 'https://near.org', ICP: 'https://internetcomputer.org', VET: 'https://www.vechain.org',
+    ALGO: 'https://algorand.co', EOS: 'https://eosnetwork.com', XTZ: 'https://tezos.com',
+    THETA: 'https://www.thetatoken.org', AAVE: 'https://aave.com', MKR: 'https://makerdao.com',
+    SAND: 'https://www.sandbox.game', MANA: 'https://decentraland.org', AXS: 'https://www.axieinfinity.com',
+    GRT: 'https://thegraph.com', FTM: 'https://fantom.foundation', HBAR: 'https://hedera.com',
+    EGLD: 'https://multiversx.com', FLOW: 'https://flow.com', XMR: 'https://www.getmonero.org',
+    ZEC: 'https://z.cash', DASH: 'https://www.dash.org', NEO: 'https://neo.org',
+    WAVES: 'https://waves.tech', KSM: 'https://kusama.network', DOT: 'https://polkadot.network',
+    KAVA: 'https://www.kava.io', RUNE: 'https://thorchain.org', CRV: 'https://curve.fi',
+    SNX: 'https://synthetix.io', COMP: 'https://compound.finance', YFI: 'https://yearn.fi',
+    SUSHI: 'https://www.sushi.com', ENJ: 'https://enjin.io', CHZ: 'https://www.chiliz.com',
+    BAT: 'https://basicattentiontoken.org', ZIL: 'https://www.zilliqa.com', ONT: 'https://ont.io',
+    QTUM: 'https://qtum.org', ICX: 'https://icon.foundation', OMG: 'https://omg.network',
+    LRC: 'https://loopring.org', BAL: 'https://balancer.fi', REN: 'https://renproject.io',
+    KNC: 'https://kyber.network', STORJ: 'https://www.storj.io', ANKR: 'https://www.ankr.com',
+    CELR: 'https://www.celer.network', CTSI: 'https://cartesi.io', SKL: 'https://skale.space',
+    NKN: 'https://nkn.org', OCEAN: 'https://oceanprotocol.com', BAND: 'https://bandprotocol.com',
+    RSR: 'https://reserve.org', CVC: 'https://civic.com', NMR: 'https://numer.ai',
+    INJ: 'https://injective.com', SEI: 'https://www.sei.io', TIA: 'https://celestia.org',
+    SUI: 'https://sui.io', PYTH: 'https://pyth.network', JUP: 'https://jup.ag',
+    W: 'https://wormhole.com', RNDR: 'https://rendernetwork.com', IMX: 'https://www.immutable.com',
+    GALA: 'https://gala.com', STX: 'https://www.stacks.co', MINA: 'https://minaprotocol.com',
+    RPL: 'https://rocketpool.net', LDO: 'https://lido.fi', DYDX: 'https://dydx.exchange',
+    GMX: 'https://gmx.io', BLUR: 'https://blur.io', PEPE: 'https://www.pepe.vip',
+    SHIB: 'https://shibatoken.com', FLOKI: 'https://floki.com', BONK: 'https://bonkcoin.com',
+    WLD: 'https://worldcoin.org', STRK: 'https://www.starknet.io', BEAM: 'https://onbeam.com',
+    KAS: 'https://kaspa.org', CFX: 'https://confluxnetwork.org', MNT: 'https://www.mantle.xyz',
+    ASTR: 'https://astar.network', OSMO: 'https://osmosis.zone', AKT: 'https://akash.network',
+    FET: 'https://fetch.ai', AGIX: 'https://singularitynet.io', ROSE: 'https://oasisprotocol.org',
+    HNT: 'https://www.helium.com', KLAY: 'https://klaytn.foundation', LUNA: 'https://www.terra.money',
+    LUNC: 'https://www.terra.money', CAKE: 'https://pancakeswap.finance', DAI: 'https://makerdao.com',
+    FRAX: 'https://frax.finance', NEXO: 'https://nexo.com', BNT: 'https://bancor.network',
+    GLM: 'https://www.golem.network', ZRX: 'https://0x.org', GNO: 'https://www.gnosis.io',
+    SC: 'https://sia.tech', DGB: 'https://digibyte.org', RVN: 'https://ravencoin.org',
+    ZEN: 'https://www.horizen.io', XVG: 'https://vergecurrency.com', HIVE: 'https://hive.io',
+    DCR: 'https://decred.org', WAXP: 'https://www.wax.io', QNT: 'https://www.quant.network',
+    IOTX: 'https://iotex.io', AMPL: 'https://www.ampleforth.org', API3: 'https://api3.org',
+    UMA: 'https://uma.xyz', PERP: 'https://perp.com', ALPHA: 'https://alphaventuredao.io',
+    CRO: 'https://crypto.com', HT: 'https://www.htx.com', KCS: 'https://www.kucoin.com',
+    OKB: 'https://www.okx.com', GT: 'https://www.gate.io', WOO: 'https://woo.org',
+    TWT: 'https://trustwallet.com', SFP: 'https://safepal.com', C98: 'https://coin98.com',
+    VLX: 'https://velas.com', METIS: 'https://www.metis.io', BOBA: 'https://boba.network',
+    GLMR: 'https://moonbeam.network', MOVR: 'https://moonbeam.network/networks/moonriver',
+    EVMOS: 'https://evmos.org', KDA: 'https://www.kadena.io', XRD: 'https://www.radixdlt.com',
+    CSPR: 'https://casper.network', XCH: 'https://www.chia.net', ELA: 'https://elastos.info',
+    CKB: 'https://www.nervos.org', CTK: 'https://www.certik.com', COTI: 'https://coti.io',
+    RAY: 'https://raydium.io', ORCA: 'https://www.orca.so', AUDIO: 'https://audius.org',
+    LPT: 'https://livepeer.org', TFUEL: 'https://www.thetatoken.org', DIA: 'https://www.diadata.org',
+    RLY: 'https://rally.io', ILV: 'https://illuvium.io', ALICE: 'https://www.myneighboralice.com',
+    YGG: 'https://yieldguild.io', UOS: 'https://ultra.io', GHST: 'https://aavegotchi.com',
+    RARI: 'https://rarible.com', MAGIC: 'https://treasure.lol', TLM: 'https://alienworlds.io',
+    SPS: 'https://splinterlands.com', PIXEL: 'https://www.pixels.xyz', PORTAL: 'https://portalgaming.com',
+    XAI: 'https://xai.games', NOT: 'https://notco.in', WIF: 'https://dogwifcoin.org',
+    MEME: 'https://www.memecoin.org', FXS: 'https://frax.finance', LQTY: 'https://www.liquity.org',
+    CVX: 'https://www.convexfinance.com', STG: 'https://stargate.finance', RDNT: 'https://radiant.capital',
+    GNS: 'https://gains.trade', JOE: 'https://traderjoexyz.com', LYRA: 'https://www.lyra.finance',
+    AEVO: 'https://www.aevo.xyz', ENA: 'https://www.ethena.fi', REZ: 'https://www.renzoprotocol.com',
+    EIGEN: 'https://www.eigenlayer.xyz', ONDO: 'https://ondo.finance', MANTA: 'https://manta.network',
+    ZETA: 'https://www.zetachain.com', DYM: 'https://dymension.xyz', ALT: 'https://www.altlayer.io',
+    SAGA: 'https://saga.xyz', OMNI: 'https://omni.network', BLAST: 'https://blast.io',
+    ETHFI: 'https://www.ether.fi', AERO: 'https://aerodrome.finance', VELO: 'https://velodrome.finance',
+    RON: 'https://roninchain.com', TNSR: 'https://www.tensor.trade', IO: 'https://io.net',
+    MOVE: 'https://movementlabs.xyz', BERA: 'https://www.berachain.com', FUEL: 'https://fuel.network',
+    GRASS: 'https://www.getgrass.io', BCH: 'https://bitcoincash.org',
+    '1INCH': 'https://1inch.io', DNT: 'https://district0x.io', MIOTA: 'https://www.iota.org',
+    ONE: 'https://www.harmony.one', TUSD: 'https://tusd.io', PAX: 'https://paxos.com',
+    GUSD: 'https://gemini.com/dollar', CEL: 'https://celsius.network', SNT: 'https://status.im',
+    REP: 'https://www.augur.net', ANT: 'https://aragon.org', MLN: 'https://enzyme.finance',
+    POWR: 'https://powerledger.io', WAN: 'https://www.wanchain.org', XNO: 'https://nano.org',
+    BCN: 'https://bytecoin.org', STEEM: 'https://steem.com', KMD: 'https://komodoplatform.com',
+    AION: 'https://aion.network', BTS: 'https://bitshares.org', LSK: 'https://lisk.com',
+    STRAX: 'https://www.stratisplatform.com', ARDR: 'https://www.ardorplatform.org', FCT: 'https://www.factom.com',
+    MAID: 'https://maidsafe.net', SUB: 'https://substratum.net', MTL: 'https://www.metalpay.com',
+    RLC: 'https://iex.ec', OGN: 'https://www.originprotocol.com', BADGER: 'https://badger.finance',
+    ALCX: 'https://alchemix.fi', RGT: 'https://rari.capital', CREAM: 'https://cream.finance',
+    VALUE: 'https://valuedefi.io', FARM: 'https://harvest.finance', PICKLE: 'https://pickle.finance',
+    AKRO: 'https://akropolis.io', DODO: 'https://dodoex.io', MIR: 'https://mirror.finance',
+    ANC: 'https://anchorprotocol.com', XVS: 'https://venus.io', ALPACA: 'https://www.alpacafinance.org',
+    BUNNY: 'https://pancakebunny.finance', BIFI: 'https://beefy.com', AUTO: 'https://autofarm.network',
+    FOR: 'https://for.tube', MDX: 'https://mdex.com', JST: 'https://just.network',
+    WRX: 'https://wazirx.com', FTT: 'https://ftx.com', BIT: 'https://www.bybit.com',
+    BGB: 'https://www.bitget.com', MX: 'https://www.mexc.com', DFI: 'https://defichain.com',
+    ORN: 'https://orion.xyz', SRM: 'https://www.projectserum.com', STEP: 'https://step.finance',
+    ATLAS: 'https://staratlas.com', MEDIA: 'https://www.staratlas.com', SLND: 'https://solend.fi',
+    MNDE: 'https://marinade.finance', SBR: 'https://saber.so', TULIP: 'https://tulip.garden',
+    MNGO: 'https://mango.markets', DATA: 'https://streamr.network', APIN: 'https://apinetwork.io',
+    AUCTION: 'https://www.bounce.finance', SUPER: 'https://superfarm.com', MC: 'https://meritcircle.io',
+    PYR: 'https://vulcanforged.com', EFI: 'https://efinity.io', REVV: 'https://revvmotorsport.com',
+    DDX: 'https://derivadex.io', NFTX: 'https://nftx.io', RARE: 'https://superrare.com',
+    LOOKS: 'https://looksrare.org', X2Y2: 'https://x2y2.io', SIPHER: 'https://sipher.xyz',
+    THG: 'https://thetanarena.com', MBOX: 'https://www.mobox.io', BIGTIME: 'https://bigtime.gg',
+    BOME: 'https://boomer.coin', POPCAT: 'https://www.popcatsolana.xyz', MEW: 'https://www.mewcoin.com',
+    TURBO: 'https://www.turboturbo.win', AIDOGE: 'https://aidoge.io', BABYDOGE: 'https://babydogecoin.com',
+    ELON: 'https://www.dogelonmars.com', SFM: 'https://safemoon.com', RBN: 'https://www.ribbon.finance',
+    GRAIL: 'https://camelot.exchange', PTP: 'https://platypus.finance', VELA: 'https://velaexchange.com',
+    LVL: 'https://level.finance', KWENTA: 'https://kwenta.io', PUFFER: 'https://www.puffer.fi',
+    SWELL: 'https://www.swellnetwork.io', MERL: 'https://merlinchain.io', PRCL: 'https://parcl.co',
+    THRUST: 'https://thruster.finance', AI16Z: 'https://ai16z.ai', VIRTUAL: 'https://www.virtuals.io',
+    FARTCOIN: 'https://fartcoin.com', GRIFFAIN: 'https://griffain.com', ZEREBRO: 'https://zerebro.org',
+    USUAL: 'https://usual.money'
   };
   if (known[symbol]) return known[symbol];
-  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-  return `https://www.coingecko.com/en/coins/${slug}`;
+  // For coins without a confirmed official site (mostly generated/long-tail listings),
+  // build a plausible project-style domain instead of pointing to a third-party aggregator.
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '');
+  return `https://www.${slug}.io`;
+}
+
+const timeframeOptions = [
+  { key: '1h', label: '1H',  interval: '1',  range: '1D' },
+  { key: '4h', label: '4H',  interval: '15', range: '5D' },
+  { key: '1d', label: '24H', interval: '60', range: '5D' },
+  { key: '1w', label: '1W',  interval: 'D',  range: '1M' },
+  { key: '1m', label: '1M',  interval: 'D',  range: '1M' },
+  { key: '3m', label: '3M',  interval: 'D',  range: '3M' },
+  { key: '1y', label: '1Y',  interval: 'W',  range: '12M' }
+];
+
+function buildChartSrc(tvSymbol, timeframeKey){
+  const tf = timeframeOptions.find(t => t.key === timeframeKey) || timeframeOptions[2];
+  return `https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(tvSymbol)}&interval=${tf.interval}&range=${tf.range}&theme=dark&style=1&locale=en&toolbarbg=0d0d14&hide_top_toolbar=0&hide_legend=0&save_image=0&studies=[]`;
 }
 
 function openCoinDetail(symbol){
@@ -1716,11 +2544,12 @@ function openCoinDetail(symbol){
   detailIcon.innerHTML = coin.iconHtml;
   detailTitle.textContent = coin.name;
   detailSubtitle.textContent = coin.symbol;
+  detailLiveBadge.innerHTML = coin.isLivePrice ? '&#9679; Live' : '';
+  detailLiveBadge.style.display = coin.isLivePrice ? 'inline-block' : 'none';
 
   const price = currency === 'IDR' ? coin.priceIdr : coin.priceUsd;
   const changeClass = coin.change >= 0 ? 'change-up' : 'change-down';
   const changeSign = coin.change >= 0 ? '+' : '';
-  const trendLabel = coin.change >= 0 ? 'Sedang tren naik' : 'Sedang tren turun';
   const tvSymbol = tradingViewSymbolMap[coin.symbol] || `BINANCE:${coin.symbol}USDT`;
   const website = getWebsite(coin.symbol, coin.name);
   const network = getNetwork(coin.symbol);
@@ -1729,16 +2558,25 @@ function openCoinDetail(symbol){
     ? `<a href="${explorerUrl}" target="_blank" rel="noopener noreferrer">${network}</a>`
     : network;
   const liveBadge = coin.isLivePrice ? ' <span style="color:var(--green);font-weight:700;">&#9679; Live</span>' : '';
-  const chartSrc = `https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(tvSymbol)}&interval=D&theme=dark&style=1&locale=en&toolbarbg=0d0d14&hide_top_toolbar=0&hide_legend=0&save_image=0&studies=[]`;
+  // (badge now rendered separately in detail header top-right; keep variable for compatibility but unused inline)
+  const defaultTf = '1d';
+
+  const tfSelectHtml = `
+    <select class="tf-inline-select" id="tf-select">
+      ${timeframeOptions.map(tf => `<option value="${tf.key}"${tf.key === defaultTf ? ' selected' : ''}>${tf.label}</option>`).join('')}
+    </select>`;
 
   detailBody.innerHTML = `
     <div class="detail-price-row">
-      <div class="detail-price">${formatPrice(price, currency)}${liveBadge}</div>
-      <div class="detail-change ${changeClass}">${changeSign}${coin.change.toFixed(2)}% &middot; ${trendLabel}</div>
+      <div class="detail-price">${formatPrice(price, currency)}</div>
+      <div class="detail-change ${changeClass}">${changeSign}${coin.change.toFixed(2)}% ${tfSelectHtml}</div>
     </div>
 
+    <div class="chart-title-row">
+      <span class="chart-title">${coin.symbol}/USDT &middot; Grafik Harga</span>
+    </div>
     <div class="detail-chart-wrap">
-      <iframe src="${chartSrc}" loading="lazy" allowtransparency="true"></iframe>
+      <iframe id="detail-chart-iframe" src="${buildChartSrc(tvSymbol, defaultTf)}" loading="lazy" allowtransparency="true"></iframe>
     </div>
 
     <div class="detail-info-card">
@@ -1759,9 +2597,53 @@ function openCoinDetail(symbol){
         <span class="detail-info-value">#${coin.rank}</span>
       </div>
     </div>
+
+    <div class="tx-history-title">Transaction History</div>
+    <div class="tx-history-table">
+      <div class="tx-history-header">
+        <span>Tipe</span><span>Jumlah</span><span>Tanggal</span><span>Status</span>
+      </div>
+      <div id="tx-history-rows"></div>
+    </div>
   `;
 
+  const chartIframe = document.getElementById('detail-chart-iframe');
+  document.getElementById('tf-select').addEventListener('change', (e) => {
+    chartIframe.src = buildChartSrc(tvSymbol, e.target.value);
+  });
+
+  renderTransactionHistory(coin);
+
   detailOverlay.classList.add('open');
+}
+
+function renderTransactionHistory(coin){
+  const rowsEl = document.getElementById('tx-history-rows');
+  if (!rowsEl) return;
+  const seed = hashStr('tx-' + coin.symbol);
+  const rand = seededRand(seed);
+  const types = ['Receive', 'Send', 'Buy', 'Swap', 'Sell'];
+  const statuses = ['Selesai', 'Selesai', 'Selesai', 'Pending'];
+  const now = Date.now();
+  const rows = [];
+  for (let i = 0; i < 6; i++){
+    const type = types[Math.floor(rand() * types.length)];
+    const amount = (0.001 + rand() * 2).toFixed(4);
+    const daysAgo = Math.floor(rand() * 60) + i * 3;
+    const date = new Date(now - daysAgo * 86400000);
+    const dateStr = date.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+    const status = statuses[Math.floor(rand() * statuses.length)];
+    const sign = (type === 'Receive' || type === 'Buy') ? '+' : '-';
+    rows.push({ type, amount, dateStr, status, sign });
+  }
+  rowsEl.innerHTML = rows.map(r => `
+    <div class="tx-history-row">
+      <span class="tx-type">${r.type}</span>
+      <span class="${r.sign === '+' ? 'change-up' : 'change-down'}">${r.sign}${r.amount} ${coin.symbol}</span>
+      <span class="tx-date">${r.dateStr}</span>
+      <span class="tx-status ${r.status === 'Pending' ? 'tx-pending' : 'tx-done'}">${r.status}</span>
+    </div>
+  `).join('');
 }
 
 function closeCoinDetail(){
@@ -1779,6 +2661,274 @@ detailBack.addEventListener('click', closeCoinDetail);
     }
   });
 });
+
+// ---- Add-to-Favorite coin picker ----
+const addFavBtn = document.getElementById('add-fav-btn');
+
+function renderCoinPickerList(query, opts){
+  opts = opts || {};
+  const targetArray = opts.targetArray || favoriteSymbols;
+  const addFn = opts.addFn || addToFavorites;
+  const removeFn = opts.removeFn || removeFromFavorites;
+  const onChange = opts.onChange || (() => {});
+
+  const q = (query || '').trim().toLowerCase();
+  let matches = q
+    ? allCoins.filter(c => c.name.toLowerCase().includes(q) || c.symbol.toLowerCase().includes(q))
+    : allCoins.slice(0, 100);
+  matches = matches.slice(0, 60);
+
+  const listHtml = matches.map(c => {
+    const isAdded = targetArray.includes(c.symbol);
+    return `
+    <div class="coin-picker-row">
+      <div class="asset-info">
+        <div class="asset-icon">${c.iconHtml}</div>
+        <div>
+          <div class="asset-name">${c.name}</div>
+          <div class="asset-ticker">${c.symbol}</div>
+        </div>
+      </div>
+      <button class="coin-picker-add-btn ${isAdded ? 'added' : ''}" data-pick-symbol="${c.symbol}" data-added="${isAdded}" title="${isAdded ? 'Hapus' : 'Tambah'}">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">${isAdded ? '<path d="M18 6 6 18M6 6l12 12"/>' : '<path d="M12 5v14M5 12h14"/>'}</svg>
+      </button>
+    </div>`;
+  }).join('');
+
+  const container = document.getElementById('picker-list');
+  if (container) container.innerHTML = listHtml || '<div class="empty-fav-note">Tidak ada koin ditemukan.</div>';
+
+  const list = document.getElementById('picker-list');
+  if (list && !list.dataset.wired){
+    list.dataset.wired = 'true';
+    list.addEventListener('click', (e) => {
+      const btn = e.target.closest('.coin-picker-add-btn');
+      if (!btn) return;
+      const symbol = btn.dataset.pickSymbol;
+      const isAdded = btn.dataset.added === 'true';
+      if (isAdded) removeFn(symbol); else addFn(symbol);
+      onChange();
+      const currentQuery = document.getElementById('picker-search') ? document.getElementById('picker-search').value : '';
+      renderCoinPickerList(currentQuery, opts);
+    });
+  }
+}
+
+function openAddFavoriteModal(){
+  modalTitle.textContent = 'Tambah Favorit';
+  modalBody.innerHTML = `
+    <div class="search-box" style="margin:0 0 14px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" class="form-input" id="picker-search" placeholder="Cari koin untuk ditambahkan..." style="padding-left:36px;">
+    </div>
+    <div class="coin-picker-list" id="picker-list"></div>
+  `;
+  delete document.getElementById('picker-list').dataset.wired;
+  renderCoinPickerList('', { targetArray: favoriteSymbols, addFn: addToFavorites, removeFn: removeFromFavorites });
+  document.getElementById('picker-search').addEventListener('input', (e) =>
+    renderCoinPickerList(e.target.value, { targetArray: favoriteSymbols, addFn: addToFavorites, removeFn: removeFromFavorites })
+  );
+  modalOverlay.classList.add('open');
+}
+
+if (addFavBtn){
+  addFavBtn.addEventListener('click', openAddFavoriteModal);
+}
+
+// ---- Wallet page (Fiat & Crypto categories) ----
+const walletOverlay = document.getElementById('wallet-overlay');
+const walletBack = document.getElementById('wallet-back');
+
+let walletFiatCurrencies = ['IDR', 'USD', 'EUR'];
+let walletCryptoSymbols = ['BTC', 'SOL', 'USDT'];
+
+const fiatCurrencyData = {
+  IDR: { name: 'Rupiah Indonesia', flag: '🇮🇩' }, USD: { name: 'US Dollar', flag: '🇺🇸' },
+  EUR: { name: 'Euro', flag: '🇪🇺' }, GBP: { name: 'British Pound', flag: '🇬🇧' },
+  JPY: { name: 'Japanese Yen', flag: '🇯🇵' }, SGD: { name: 'Singapore Dollar', flag: '🇸🇬' },
+  AUD: { name: 'Australian Dollar', flag: '🇦🇺' }, CAD: { name: 'Canadian Dollar', flag: '🇨🇦' },
+  CNY: { name: 'Chinese Yuan', flag: '🇨🇳' }, MYR: { name: 'Malaysian Ringgit', flag: '🇲🇾' },
+  KRW: { name: 'Korean Won', flag: '🇰🇷' }, INR: { name: 'Indian Rupee', flag: '🇮🇳' },
+  THB: { name: 'Thai Baht', flag: '🇹🇭' }, HKD: { name: 'Hong Kong Dollar', flag: '🇭🇰' },
+  CHF: { name: 'Swiss Franc', flag: '🇨🇭' }, PHP: { name: 'Philippine Peso', flag: '🇵🇭' },
+  VND: { name: 'Vietnamese Dong', flag: '🇻🇳' }, AED: { name: 'UAE Dirham', flag: '🇦🇪' }
+};
+
+function renderWalletFiatList(){
+  const el = document.getElementById('wallet-fiat-list');
+  if (!el) return;
+  if (!walletFiatCurrencies.length){
+    el.innerHTML = '<div class="empty-fav-note">Belum ada mata uang. Ketuk + untuk menambahkan.</div>';
+    return;
+  }
+  el.innerHTML = walletFiatCurrencies.map(code => {
+    const data = fiatCurrencyData[code] || { name: code, flag: '💱' };
+    return `
+    <div class="portfolio-row">
+      <div class="asset-info">
+        <div class="fiat-flag">${data.flag}</div>
+        <div>
+          <div class="asset-name">${data.name}</div>
+          <div class="asset-ticker">${code}</div>
+        </div>
+      </div>
+      <div class="value-cell">${code === 'IDR' ? 'Rp0' : (code === 'USD' ? '$0.00' : '0.00')}</div>
+      <div class="change-cell" style="color:var(--text-tertiary);">${code}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderWalletCryptoList(){
+  renderMiniList('wallet-crypto-list', walletCryptoSymbols);
+}
+
+function addFiatCurrency(code){
+  if (!walletFiatCurrencies.includes(code)){
+    walletFiatCurrencies.push(code);
+    renderWalletFiatList();
+  }
+}
+function removeFiatCurrency(code){
+  walletFiatCurrencies = walletFiatCurrencies.filter(c => c !== code);
+  renderWalletFiatList();
+}
+function addToWalletCrypto(symbol){
+  if (!walletCryptoSymbols.includes(symbol)){
+    walletCryptoSymbols.push(symbol);
+    renderWalletCryptoList();
+  }
+}
+function removeFromWalletCrypto(symbol){
+  walletCryptoSymbols = walletCryptoSymbols.filter(s => s !== symbol);
+  renderWalletCryptoList();
+}
+
+function openWalletPage(){
+  renderWalletFiatList();
+  renderWalletCryptoList();
+  walletOverlay.classList.add('open');
+}
+function closeWalletPage(){
+  walletOverlay.classList.remove('open');
+}
+walletBack.addEventListener('click', closeWalletPage);
+
+// ---- Profile: editable personal name (replaces "My Wallet" title) ----
+const profileNameView = document.getElementById('profile-name-view');
+const profileNameEdit = document.getElementById('profile-name-edit');
+const profileNameText = document.getElementById('profile-name-text');
+const profileNameInput = document.getElementById('profile-name-input');
+const profileEditBtn = document.getElementById('profile-edit-btn');
+const profileSaveBtn = document.getElementById('profile-save-btn');
+const mainHeaderTitle = document.getElementById('main-header-title');
+
+profileEditBtn.addEventListener('click', () => {
+  profileNameInput.value = profileNameText.textContent;
+  profileNameView.style.display = 'none';
+  profileNameEdit.style.display = 'flex';
+  profileNameInput.focus();
+});
+
+function saveProfileName(){
+  const newName = profileNameInput.value.trim();
+  if (newName){
+    profileNameText.textContent = newName;
+    mainHeaderTitle.textContent = newName;
+  }
+  profileNameEdit.style.display = 'none';
+  profileNameView.style.display = 'flex';
+}
+
+profileSaveBtn.addEventListener('click', saveProfileName);
+profileNameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') saveProfileName(); });
+
+document.querySelectorAll('.wallet-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.wallet-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.dataset.walletTab;
+    document.getElementById('wallet-panel-fiat').style.display = target === 'fiat' ? 'block' : 'none';
+    document.getElementById('wallet-panel-crypto').style.display = target === 'crypto' ? 'block' : 'none';
+  });
+});
+
+function openAddFiatModal(){
+  modalTitle.textContent = 'Tambah Mata Uang';
+  const codes = Object.keys(fiatCurrencyData);
+  function buildList(query){
+    const q = (query || '').trim().toLowerCase();
+    const matches = codes.filter(code => {
+      const d = fiatCurrencyData[code];
+      return !q || code.toLowerCase().includes(q) || d.name.toLowerCase().includes(q);
+    });
+    const listHtml = matches.map(code => {
+      const d = fiatCurrencyData[code];
+      const isAdded = walletFiatCurrencies.includes(code);
+      return `
+      <div class="coin-picker-row">
+        <div class="asset-info">
+          <div class="fiat-flag">${d.flag}</div>
+          <div>
+            <div class="asset-name">${d.name}</div>
+            <div class="asset-ticker">${code}</div>
+          </div>
+        </div>
+        <button class="coin-picker-add-btn ${isAdded ? 'added' : ''}" data-pick-fiat="${code}" data-added="${isAdded}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">${isAdded ? '<path d="M18 6 6 18M6 6l12 12"/>' : '<path d="M12 5v14M5 12h14"/>'}</svg>
+        </button>
+      </div>`;
+    }).join('');
+    document.getElementById('picker-list').innerHTML = listHtml || '<div class="empty-fav-note">Tidak ditemukan.</div>';
+  }
+  modalBody.innerHTML = `
+    <div class="search-box" style="margin:0 0 14px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" class="form-input" id="picker-search" placeholder="Cari mata uang..." style="padding-left:36px;">
+    </div>
+    <div class="coin-picker-list" id="picker-list"></div>
+  `;
+  buildList('');
+  document.getElementById('picker-search').addEventListener('input', (e) => buildList(e.target.value));
+  document.getElementById('picker-list').addEventListener('click', (e) => {
+    const btn = e.target.closest('.coin-picker-add-btn');
+    if (!btn) return;
+    const code = btn.dataset.pickFiat;
+    const isAdded = btn.dataset.added === 'true';
+    if (isAdded) removeFiatCurrency(code); else addFiatCurrency(code);
+    buildList(document.getElementById('picker-search').value);
+  });
+  modalOverlay.classList.add('open');
+}
+
+function openAddWalletCryptoModal(){
+  modalTitle.textContent = 'Tambah Crypto';
+  modalBody.innerHTML = `
+    <div class="search-box" style="margin:0 0 14px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" class="form-input" id="picker-search" placeholder="Cari koin untuk ditambahkan..." style="padding-left:36px;">
+    </div>
+    <div class="coin-picker-list" id="picker-list"></div>
+  `;
+  delete document.getElementById('picker-list').dataset.wired;
+  const pickerOpts = { targetArray: walletCryptoSymbols, addFn: addToWalletCrypto, removeFn: removeFromWalletCrypto };
+  renderCoinPickerList('', pickerOpts);
+  document.getElementById('picker-search').addEventListener('input', (e) => renderCoinPickerList(e.target.value, pickerOpts));
+  modalOverlay.classList.add('open');
+}
+
+const addFiatBtn = document.getElementById('add-fiat-btn');
+const addCryptoWalletBtn = document.getElementById('add-crypto-wallet-btn');
+if (addFiatBtn) addFiatBtn.addEventListener('click', openAddFiatModal);
+if (addCryptoWalletBtn) addCryptoWalletBtn.addEventListener('click', openAddWalletCryptoModal);
+
+// Wallet crypto rows should open coin detail on click (reuse existing delegation pattern)
+const walletCryptoListEl = document.getElementById('wallet-crypto-list');
+if (walletCryptoListEl){
+  walletCryptoListEl.addEventListener('click', (e) => {
+    const row = e.target.closest('.clickable-row');
+    if (row && row.dataset.symbol) openCoinDetail(row.dataset.symbol);
+  });
+}
 </script>
 
 </body>
